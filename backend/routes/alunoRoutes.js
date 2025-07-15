@@ -1,5 +1,4 @@
 const express = require('express');
-const express = require('express');
 const router = express.Router();
 const alunoController = require('../controllers/alunoController');
 
@@ -7,25 +6,30 @@ const alunoController = require('../controllers/alunoController');
  * @swagger
  * tags:
  *   name: Alunos
- *   description: Gestão dos alunos
+ *   description: Gerenciamento de alunos
  */
 
 /**
  * @swagger
- * /api/alunos:
+ * /alunos:
  *   get:
  *     summary: Lista todos os alunos
  *     tags: [Alunos]
  *     responses:
  *       200:
- *         description: Lista de alunos retornada com sucesso
+ *         description: Lista de alunos
  *         content:
  *           application/json:
  *             schema:
  *               type: array
  *               items:
  *                 $ref: '#/components/schemas/Aluno'
- * 
+ */
+router.get('/', alunoController.getAllAlunos);
+
+/**
+ * @swagger
+ * /alunos:
  *   post:
  *     summary: Cria um novo aluno
  *     tags: [Alunos]
@@ -34,17 +38,20 @@ const alunoController = require('../controllers/alunoController');
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Aluno'
+ *             $ref: '#/components/schemas/AlunoInput'
  *     responses:
  *       201:
- *         description: Aluno criado com sucesso
+ *         description: Aluno criado
+ *       400:
+ *         description: Requisição inválida
  */
+router.post('/', alunoController.createAluno);
 
 /**
  * @swagger
- * /api/alunos/{id}:
+ * /alunos/{id}:
  *   put:
- *     summary: Atualiza um aluno pelo id
+ *     summary: Atualiza um aluno
  *     tags: [Alunos]
  *     parameters:
  *       - in: path
@@ -58,13 +65,20 @@ const alunoController = require('../controllers/alunoController');
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/Aluno'
+ *             $ref: '#/components/schemas/AlunoInput'
  *     responses:
  *       200:
  *         description: Aluno atualizado
- * 
+ *       404:
+ *         description: Aluno não encontrado
+ */
+router.put('/:id', alunoController.updateAluno);
+
+/**
+ * @swagger
+ * /alunos/{id}:
  *   delete:
- *     summary: Remove um aluno pelo id
+ *     summary: Remove um aluno
  *     tags: [Alunos]
  *     parameters:
  *       - in: path
@@ -76,41 +90,9 @@ const alunoController = require('../controllers/alunoController');
  *     responses:
  *       204:
  *         description: Aluno removido
+ *       404:
+ *         description: Aluno não encontrado
  */
-
-router.get('/', alunoController.getAllAlunos);
-router.post('/', alunoController.createAluno);
-router.put('/:id', alunoController.updateAluno);
 router.delete('/:id', alunoController.deleteAluno);
 
 module.exports = router;
-
-/**
- * @swagger
- * components:
- *   schemas:
- *     Aluno:
- *       type: object
- *       required:
- *         - nome
- *         - apelido
- *         - curso
- *         - anoCurricular
- *       properties:
- *         id:
- *           type: string
- *           description: ID gerado automaticamente pelo MongoDB
- *         nome:
- *           type: string
- *         apelido:
- *           type: string
- *         curso:
- *           type: string
- *         anoCurricular:
- *           type: integer
- *       example:
- *         nome: "João"
- *         apelido: "Silva"
- *         curso: "Engenharia Informática"
- *         anoCurricular: 2
- */
