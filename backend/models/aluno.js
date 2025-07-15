@@ -1,13 +1,18 @@
-exports.getAllAlunos = async (req, res) => {
-  const alunos = await Aluno.find();
+const mongoose = require('mongoose');
 
-  const alunosComId = alunos.map(aluno => ({
-    id: aluno._id.toString(),
-    nome: aluno.nome,
-    apelido: aluno.apelido,
-    curso: aluno.curso,
-    anoCurricular: aluno.anoCurricular
-  }));
+const alunoSchema = new mongoose.Schema({
+  nome: String,
+  apelido: String,
+  curso: String,
+  anoCurricular: Number
+});
 
-  res.json(alunosComId);
-};
+alunoSchema.set('toJSON', {
+  transform: (doc, ret) => {
+    ret.id = ret._id.toString();
+    delete ret._id;
+    delete ret.__v;
+  }
+});
+
+module.exports = mongoose.model('Aluno', alunoSchema);
