@@ -8,16 +8,16 @@ async function fetchAlunos() {
   alunosTable.innerHTML = '';
   alunos.forEach(aluno => {
     const row = document.createElement('tr');
-    row.innerHTML = `
-      <td>${aluno.nome}</td>
-      <td>${aluno.apelido}</td>
-      <td>${aluno.curso}</td>
-      <td>${aluno.anoCurricular}</td>
-      <td class="actions">
-        <button onclick='editAluno(${JSON.stringify(aluno)})'>✏️</button>
-        <button onclick='deleteAluno(${aluno.id})'>🗑️</button>
-      </td>
-    `;
+   row.innerHTML = `
+  <td>${aluno.nome}</td>
+  <td>${aluno.apelido}</td>
+  <td>${aluno.curso}</td>
+  <td>${aluno.anoCurricular}</td>
+  <td class="actions">
+    <button onclick='editAluno(${JSON.stringify(aluno)})'>✏️</button>
+    <button onclick="deleteAluno('${aluno.id}')">🗑️</button>
+  </td>
+`;
     alunosTable.appendChild(row);
   });
 }
