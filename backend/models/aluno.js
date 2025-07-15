@@ -1,10 +1,13 @@
-const alunos = await Aluno.find();
+exports.getAllAlunos = async (req, res) => {
+  const alunos = await Aluno.find();
 
-const alunosComId = alunos.map(aluno => ({
-  id: aluno._id.toString(),
-  nome: aluno.nome,
-  apelido: aluno.apelido,
-  curso: aluno.curso,
-  anoCurricular: aluno.anoCurricular
-}));
-res.json(alunosComId);
+  const alunosComId = alunos.map(aluno => ({
+    id: aluno._id.toString(),
+    nome: aluno.nome,
+    apelido: aluno.apelido,
+    curso: aluno.curso,
+    anoCurricular: aluno.anoCurricular
+  }));
+
+  res.json(alunosComId);
+};
