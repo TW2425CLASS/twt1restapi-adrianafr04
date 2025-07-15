@@ -1,10 +1,10 @@
-const mongoose = require('mongoose');
+const alunos = await Aluno.find();
 
-const alunoSchema = new mongoose.Schema({
-  nome: String,
-  apelido: String,
-  curso: String,
-  anoCurricular: Number
-});
-
-module.exports = mongoose.model('Aluno', alunoSchema);
+const alunosComId = alunos.map(aluno => ({
+  id: aluno._id.toString(),
+  nome: aluno.nome,
+  apelido: aluno.apelido,
+  curso: aluno.curso,
+  anoCurricular: aluno.anoCurricular
+}));
+res.json(alunosComId);
