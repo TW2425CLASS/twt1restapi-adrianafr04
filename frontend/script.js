@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/alunos';
+const API_URL = 'https://twt1restapi-adrianafr04.onrender.com/api/alunos';
 const alunoForm = document.getElementById('alunoForm');
 const alunosTable = document.getElementById('alunosTable');
 
