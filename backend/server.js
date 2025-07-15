@@ -7,7 +7,7 @@ const alunoRoutes = require('./routes/alunoRoutes');
 
 const app = express();
 
-app.use(cors());
+app.use(cors()); // permite todos os domínios (ajuda no desenvolvimento)
 app.use(express.json());
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -23,7 +23,4 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Servidor Express ativo em http://localhost:${PORT}`);
-});
-app.get('/', (req, res) => {
-  res.send('API está a funcionar');
 });

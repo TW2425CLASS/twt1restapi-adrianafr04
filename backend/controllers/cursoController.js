@@ -1,12 +1,10 @@
-const Curso = require('../models/curso');
+const express = require('express');
+const router = express.Router();
+const alunoController = require('../controllers/alunoController');
 
-exports.getAllCursos = async (req, res) => {
-  const cursos = await Curso.find();
-  res.json(cursos);
-};
+router.get('/', alunoController.getAllAlunos);
+router.post('/', alunoController.createAluno);
+router.put('/:id', alunoController.updateAluno);
+router.delete('/:id', alunoController.deleteAluno);
 
-exports.createCurso = async (req, res) => {
-  const novoCurso = new Curso(req.body);
-  await novoCurso.save();
-  res.status(201).json(novoCurso);
-};
+module.exports = router;
