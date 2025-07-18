@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/VezZDIH2)
 # Trabalho Prático #1
 
 ## Consumo e Implementação de APIs RESTful
@@ -150,3 +151,75 @@ projeto-raiz/
 
 Usa o repositório template inicial fornecido no GitHub Classroom.
 # TWT1RESTAPI
+
+---
+
+# API TWT1 - Gestão de Alunos
+
+Este repositório contém uma API RESTful desenvolvida com **Node.js**, **Express** e **MongoDB** para realizar a gestão de alunos de forma simples.
+
+## 🔗 Deploys
+
+- **Frontend:** [https://twt1restapi-adrianafr04.vercel.app](https://twt1restapi-adrianafr04.vercel.app)
+- **Backend:** [https://twt1restapi-adrianafr04.onrender.com](https://twt1restapi-adrianafr04.onrender.com)
+- **Swagger (Documentação da API):** [https://twt1restapi-adrianafr04.onrender.com/api-docs](https://twt1restapi-adrianafr04.onrender.com/api-docs)
+
+---
+
+## 📁 Estrutura de Pastas
+
+```
+📦backend
+ ┣ 📂controllers         # Lógica das rotas (CRUD)
+ ┣ 📂models              # Definição do modelo Mongoose
+ ┣ 📂routes              # Rotas da API
+ ┣ 📜swagger.js          # Configuração do Swagger
+ ┗ 📜server.js           # Ponto de entrada da aplicação
+
+📦frontend
+ ┣ 📜index.html          # Interface com formulário e tabela
+ ┣ 📜script.js           # Requisições para a API e manipulação do DOM
+ ┗ 📜style.css           # Estilo visual da aplicação
+```
+
+---
+
+## 🚀 Como executar localmente
+
+### Pré-requisitos
+
+- Node.js instalado
+- MongoDB local ou Atlas
+
+### Backend
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+### Frontend
+
+Abra o arquivo `frontend/index.html` com a extensão **Live Server** no VSCode ou arraste para o navegador.
+
+---
+
+## 🧪 Funcionalidades
+
+- ✅ Adicionar aluno
+- ✅ Editar aluno
+- ✅ Remover aluno
+- ✅ Listar alunos
+- ✅ Integração com MongoDB
+- ✅ Documentação Swagger
+
+---
+
+## 👨‍💻 Tecnologias
+
+- Node.js
+- Express
+- MongoDB com Mongoose
+- Swagger (OpenAPI)
+- HTML/CSS/JavaScript (vanilla)
