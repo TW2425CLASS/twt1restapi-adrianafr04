@@ -1,3 +1,13 @@
+const express = require('express');
+const router = express.Router();
+const alunoController = require('../controllers/alunoController');
+
+router.get('/', alunoController.getAllAlunos);
+router.post('/', alunoController.createAluno);
+router.put('/:id', alunoController.updateAluno);
+router.delete('/:id', alunoController.deleteAluno);
+
+module.exports = router
 const Aluno = require('../models/aluno');
 
 exports.getAllAlunos = async (req, res) => {
@@ -20,3 +30,4 @@ exports.deleteAluno = async (req, res) => {
   await Aluno.findByIdAndDelete(req.params.id);
   res.status(204).send();
 };
+;

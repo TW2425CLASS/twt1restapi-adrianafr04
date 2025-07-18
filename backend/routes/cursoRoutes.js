@@ -1,50 +1,45 @@
 const express = require('express');
 const router = express.Router();
-const cursoController = require('../controllers/cursoController');
+const Curso = require('../models/curso');
 
 /**
  * @swagger
- * tags:
- *   name: Cursos
- *   description: Endpoints para gerenciamento de cursos
- */
-
-/**
- * @swagger
- * /api/cursos:
+ * /api/cursos/{id}:
  *   get:
- *     summary: Lista todos os cursos
+ *     summary: Retorna um curso específico pelo ID
  *     tags: [Cursos]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID do curso
+ *         schema:
+ *           type: string
  *     responses:
  *       200:
- *         description: Lista de cursos retornada com sucesso
+ *         description: Curso encontrado
  *         content:
  *           application/json:
  *             schema:
- *               type: array
- *               items:
- *                 $ref: '#/components/schemas/Curso'
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                 nome:
+ *                   type: string
+ *                 duracao:
+ *                   type: number
+ *       404:
+ *         description: Curso não encontrado
  */
-router.get('/', cursoController.getAllCursos);
-
-/**
- * @swagger
- * /api/cursos:
- *   post:
- *     summary: Cria um novo curso
- *     tags: [Cursos]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             $ref: '#/components/schemas/CursoInput'
- *     responses:
- *       201:
- *         description: Curso criado com sucesso
- *       400:
- *         description: Requisição inválida
- */
-router.post('/', cursoController.createCurso);
+router.get('/:id', async (req, res) => {
+  try {
+    const curso = await Curso.findById(req.params.id);
+    if (!curso) return res.status(404).json({ mensagem: 'Curso não encontrado' });
+    res.json(curso);
+  } catch (err) {
+    res.status(400).json({ erro: 'ID inválido' });
+  }
+});
 
 module.exports = router;

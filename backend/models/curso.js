@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const cursoSchema = new mongoose.Schema({
-  nomeDoCurso: String
+const CursoSchema = new mongoose.Schema({
+  nome: String
 });
 
-module.exports = mongoose.model('Curso', cursoSchema);
+module.exports = mongoose.model('Curso', CursoSchema);

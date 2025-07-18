@@ -16,3 +16,14 @@ const swaggerOptions = {
 };
 
 module.exports = swaggerOptions;
+module.exports = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'API TWT1',
+      version: '1.0.0',
+      description: 'Documentação da API para alunos e cursos'
+    }
+  },
+  apis: ['./routes/*.js'] 
+};

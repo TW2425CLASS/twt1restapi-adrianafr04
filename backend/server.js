@@ -32,3 +32,5 @@ const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Servidor Express ativo em http://localhost:${PORT}`);
 })
+const cursoRoutes = require('./routes/cursoRoutes');
+app.use('/api/cursos', cursoRoutes);
