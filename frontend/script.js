@@ -61,7 +61,9 @@ async function addOrUpdateAluno(e) {
     } else {
       await createAluno(aluno);
     }
+
     alunoForm.reset();
+    document.getElementById('id').value = ''; // ← CORREÇÃO: limpa o ID oculto
     fetchAlunos();
   } catch (error) {
     showError(error.message);
