@@ -1,0 +1,171 @@
+:root {
+  --primary: #4361ee;       /* Azul moderno */
+  --secondary: #3a0ca3;     /* Azul mais escuro */
+  --light: #f8f9fa;         /* Fundo claro */
+  --dark: #212529;          /* Texto escuro */
+  --success: #4cc9f0;       /* Azul claro (para ações) */
+  --danger: #f72585;        /* Rosa (para deletar) */
+  --border: #dee2e6;        /* Bordas suaves */
+}
+
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f5f7fa;  /* Fundo mais suave */
+  color: var(--dark);
+  line-height: 1.6;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 30px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);  /* Sombra sutil */
+}
+
+h1 {
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 2em;
+}
+
+/* ----------- FORMULÁRIO ----------- */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 30px;
+  background: var(--light);
+  padding: 20px;
+  border-radius: 8px;
+}
+
+form input {
+  flex: 1 1 200px;  /* Responsivo */
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 1em;
+  transition: border 0.3s;
+}
+
+form input:focus {
+  border-color: var(--primary);
+  outline: none;
+}
+
+form button {
+  flex: 1 1 150px;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+form button:hover {
+  background-color: var(--secondary);
+}
+
+/* ----------- BARRA DE PESQUISA (adicione no HTML) ----------- */
+.search-container {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 12px 20px 12px 40px;
+  border: 2px solid var(--border);
+  border-radius: 30px;
+  font-size: 1em;
+}
+
+#searchInput:focus {
+  border-color: var(--primary);
+}
+
+.search-container::before {
+  content: "🔍";
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* ----------- TABELA ----------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+thead {
+  background-color: var(--primary);
+  color: white;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+tr:hover {
+  background-color: rgba(67, 97, 238, 0.05);  /* Azul bem clarinho */
+}
+
+/* ----------- BOTÕES DE AÇÃO ----------- */
+.actions button {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9em;
+  margin-right: 5px;
+  transition: opacity 0.3s;
+}
+
+.actions button:hover {
+  opacity: 0.8;
+}
+
+.actions button:first-child {
+  background-color: var(--success);
+  color: white;
+}
+
+.actions button:last-child {
+  background-color: var(--danger);
+  color: white;
+}
+
+/* ----------- RESPONSIVIDADE ----------- */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+  
+  th, td {
+    padding: 8px 10px;
+  }
+  
+  form {
+    flex-direction: column;
+  }
+}

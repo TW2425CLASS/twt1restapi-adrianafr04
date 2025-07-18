@@ -1,0 +1,94 @@
+{
+  "alunos": [
+    {
+      "nome": "Zézinho",
+      "apelido": "Silva",
+      "curso": "1",
+      "anoCurricular": 2,
+      "id": 1
+    },
+    {
+      "nome": "Cristiano",
+      "apelido": "Carvalho",
+      "curso": "6",
+      "anoCurricular": 3,
+      "id": 2
+    },
+    {
+      "id": 3,
+      "nome": "Bruna",
+      "apelido": "Lourenço",
+      "curso": 13,
+      "anoCurricular": 1,
+      "idade": 19
+    },
+    {
+      "nome": "Joana",
+      "apelido": "Oliveira",
+      "curso": "13",
+      "anoCurricular": 3,
+      "id": 5
+    },
+    {
+      "nome": "Sofia",
+      "apelido": "Pereira",
+      "curso": "4",
+      "anoCurricular": 2,
+      "id": 6
+    }
+  ],
+  "cursos": [
+    {
+      "id": 1,
+      "nomeDoCurso": "Engenharia da Computação Gráfica e Multimédia"
+    },
+    {
+      "id": 2,
+      "nomeDoCurso": "Engenharia de Redes e Sistemas de Computadores"
+    },
+    {
+      "id": 3,
+      "nomeDoCurso": "Desing de Ambientes"
+    },
+    {
+      "id": 4,
+      "nomeDoCurso": "Engenharia Alimentar"
+    },
+    {
+      "id": 5,
+      "nomeDoCurso": "Engenharia Mecânica"
+    },
+    {
+      "id": 6,
+      "nomeDoCurso": "Gastronomia e Artes Culinárias"
+    },
+    {
+      "id": 7,
+      "nomeDoCurso": "Tecnologia Alimentar e Nutrição"
+    },
+    {
+      "id": 8,
+      "nomeDoCurso": "Desing de Produto"
+    },
+    {
+      "id": 9,
+      "nomeDoCurso": "Engenharia Civil e do Ambiente"
+    },
+    {
+      "id": 10,
+      "nomeDoCurso": "Engenharia Informática"
+    },
+    {
+      "id": 11,
+      "nomeDoCurso": "Engenharia Mecatrónica"
+    },
+    {
+      "id": 12,
+      "nomeDoCurso": "Turismo"
+    },
+    {
+      "id": 13,
+      "nomeDoCurso": "Gestão"
+    }
+  ]
+}
