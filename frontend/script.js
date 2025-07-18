@@ -1,23 +1,10 @@
 const API_URL = 'https://twt1restapi-adrianafr04.onrender.com/api/alunos';
+const CURSO_API_URL = 'https://twt1restapi-adrianafr04.onrender.com/api/cursos'; 
 const alunoForm = document.getElementById('alunoForm');
 const alunosTable = document.getElementById('alunosTable');
-const searchInput = document.getElementById('searchInput');
+const searchInput = document.getElementById('searchInput'); 
 
-// Cria o botão "Novo Aluno" dentro do form
-function createNovoAlunoButton() {
-  const btnNovo = document.createElement('button');
-  btnNovo.type = 'button'; // para não submeter o form
-  btnNovo.textContent = 'Novo Aluno';
-  btnNovo.className = 'btn-novo'; // para estilizar se quiser
-  btnNovo.style.marginLeft = '10px';
-  btnNovo.addEventListener('click', () => {
-    alunoForm.reset();
-    document.getElementById('id').value = ''; // limpa o id oculto para não ficar editando
-  });
-  alunoForm.appendChild(btnNovo);
-}
-
-// Mostrar erro simples na tela
+// Função para exibir mensagens de erro
 function showError(message) {
   const errorElement = document.createElement('div');
   errorElement.className = 'error-message';
@@ -26,7 +13,7 @@ function showError(message) {
   setTimeout(() => errorElement.remove(), 3000);
 }
 
-// Buscar alunos da API
+// Busca alunos com tratamento de erro
 async function fetchAlunos() {
   try {
     const res = await fetch(API_URL);
@@ -38,10 +25,9 @@ async function fetchAlunos() {
   }
 }
 
-// Renderiza tabela de alunos
+// Renderiza a tabela de alunos
 function renderAlunos(alunos) {
-  const tbody = alunosTable.querySelector('tbody');
-  tbody.innerHTML = '';
+  alunosTable.innerHTML = '';
   alunos.forEach(aluno => {
     const row = document.createElement('tr');
     row.innerHTML = `
@@ -50,17 +36,15 @@ function renderAlunos(alunos) {
       <td>${aluno.curso}</td>
       <td>${aluno.anoCurricular}</td>
       <td class="actions">
-        <button class="btn-edit">✏️</button>
-        <button class="btn-delete">🗑️</button>
+        <button class="btn-edit" onclick='editAluno(${JSON.stringify(aluno)})'>✏️</button>
+        <button class="btn-delete" onclick="deleteAluno('${aluno.id}')">🗑️</button>
       </td>
     `;
-    // Ações dos botões
-    row.querySelector('.btn-edit').addEventListener('click', () => editAluno(aluno));
-    row.querySelector('.btn-delete').addEventListener('click', () => deleteAluno(aluno._id));
-    tbody.appendChild(row);
+    alunosTable.appendChild(row);
   });
 }
 
+// Adiciona ou atualiza aluno
 async function addOrUpdateAluno(e) {
   e.preventDefault();
   const id = document.getElementById('id').value;
@@ -78,7 +62,6 @@ async function addOrUpdateAluno(e) {
       await createAluno(aluno);
     }
     alunoForm.reset();
-    document.getElementById('id').value = ''; // limpa o id para novo cadastro
     fetchAlunos();
   } catch (error) {
     showError(error.message);
@@ -89,7 +72,7 @@ async function createAluno(aluno) {
   const res = await fetch(API_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(aluno),
+    body: JSON.stringify(aluno)
   });
   if (!res.ok) throw new Error('Falha ao criar aluno');
 }
@@ -98,13 +81,13 @@ async function updateAluno(id, aluno) {
   const res = await fetch(`${API_URL}/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(aluno),
+    body: JSON.stringify(aluno)
   });
   if (!res.ok) throw new Error('Falha ao atualizar aluno');
 }
 
 function editAluno(aluno) {
-  document.getElementById('id').value = aluno._id || aluno.id;
+  document.getElementById('id').value = aluno.id;
   document.getElementById('nome').value = aluno.nome;
   document.getElementById('apelido').value = aluno.apelido;
   document.getElementById('curso').value = aluno.curso;
@@ -123,10 +106,44 @@ async function deleteAluno(id) {
   }
 }
 
+// Busca cursos (nova funcionalidade)
+async function buscarCurso() {
+  const cursoId = document.getElementById('curso-id').value;
+  if (!cursoId) {
+    showError('Por favor insira o número do curso.');
+    return;
+  }
+
+  try {
+    const res = await fetch(`${CURSO_API_URL}/${cursoId}`);
+    if (!res.ok) throw new Error('Curso não encontrado');
+    const curso = await res.json();
+    mostrarCursoNaTabela(curso);
+  } catch (error) {
+    showError(error.message);
+    document.getElementById('curso-detalhes').innerHTML = `
+      <tr><td colspan="2">Nenhum curso encontrado</td></tr>
+    `;
+  }
+}
+
+function mostrarCursoNaTabela(curso) {
+  const tbody = document.getElementById('curso-detalhes');
+  tbody.innerHTML = `
+    <tr>
+      <td>${curso.nome}</td>
+      <td>${curso.descricao || 'Sem descrição'}</td>
+      <td>${curso.duracao}</td>
+    </tr>
+  `;
+}
+
+// Filtro de busca (nova funcionalidade)
 function setupSearch() {
   searchInput.addEventListener('input', (e) => {
     const term = e.target.value.toLowerCase();
-    const rows = alunosTable.querySelectorAll('tbody tr');
+    const rows = alunosTable.querySelectorAll('tr');
+    
     rows.forEach(row => {
       const text = row.textContent.toLowerCase();
       row.style.display = text.includes(term) ? '' : 'none';
@@ -135,10 +152,8 @@ function setupSearch() {
 }
 
 // Inicialização
+alunoForm.addEventListener('submit', addOrUpdateAluno);
 document.addEventListener('DOMContentLoaded', () => {
-  createNovoAlunoButton();
   fetchAlunos();
   setupSearch();
 });
-
-alunoForm.addEventListener('submit', addOrUpdateAluno);
